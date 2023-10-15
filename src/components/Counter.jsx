@@ -14,6 +14,20 @@ export default function Counter() {
     dispatch({ type: 'counter/incremented' });
   };
 
+  const toggleCounterIncrease = () => {
+    const value = prompt('Add Value');
+    const valueToNumber = parseInt(value);
+
+    if (
+      value !== null &&
+      typeof valueToNumber === 'number' &&
+      !isNaN(valueToNumber) &&
+      valueToNumber > 0
+    ) {
+      dispatch({ type: 'counter/increase', amount: valueToNumber });
+    }
+  };
+
   const toggleCounterDecrement = () => {
     dispatch({ type: 'counter/decremented' });
   };
@@ -24,6 +38,7 @@ export default function Counter() {
       <div className={classes.value}>{counter}</div>
       <div>
         <button onClick={toggleCounterIncrement}>Increment</button>
+        <button onClick={toggleCounterIncrease}>Dynamic Increment</button>
         <button onClick={toggleCounterDecrement}>Decrement</button>
       </div>
       <button onClick={toggleCounterHandler}>Toggle Counter</button>
