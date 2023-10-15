@@ -1,13 +1,21 @@
+// import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import classes from './Counter.module.css';
 
 export default function Counter() {
+  // const [hideCounter, setHideCounter] = useState(false);
+
   const counter = useSelector((state) => state.counter);
+  const showCounter = useSelector((state) => state.showCounter);
 
   const dispatch = useDispatch();
 
   const toggleCounterHandler = () => {
-    console.log(counter);
+    dispatch({ type: 'counter/toggle', showCounter: true });
+
+    // const counterDiv = document.getElementById('counter');
+
+    // counterDiv.style.display = showCounter ? 'block' : 'none';
   };
 
   const toggleCounterIncrement = () => {
@@ -35,7 +43,7 @@ export default function Counter() {
   return (
     <main className={classes.counter}>
       <h1>Redux Counter</h1>
-      <div className={classes.value}>{counter}</div>
+      {showCounter && <div className={classes.value}>{counter}</div>}
       <div>
         <button onClick={toggleCounterIncrement}>Increment</button>
         <button onClick={toggleCounterIncrease}>Dynamic Increment</button>
