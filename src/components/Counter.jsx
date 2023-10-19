@@ -1,25 +1,24 @@
-// import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import {
+  counterIncrement,
+  counterDecrement,
+  counterIncrementByAmmount,
+  counterToggle,
+} from '../store/index';
 import classes from './Counter.module.css';
 
 export default function Counter() {
-  // const [hideCounter, setHideCounter] = useState(false);
-
   const counter = useSelector((state) => state.counter);
   const showCounter = useSelector((state) => state.showCounter);
 
   const dispatch = useDispatch();
 
   const toggleCounterHandler = () => {
-    dispatch({ type: 'counter/toggle', showCounter: true });
-
-    // const counterDiv = document.getElementById('counter');
-
-    // counterDiv.style.display = showCounter ? 'block' : 'none';
+    dispatch(counterToggle());
   };
 
   const toggleCounterIncrement = () => {
-    dispatch({ type: 'counter/incremented' });
+    dispatch(counterIncrement());
   };
 
   const toggleCounterIncrease = () => {
@@ -32,12 +31,12 @@ export default function Counter() {
       !isNaN(valueToNumber) &&
       valueToNumber > 0
     ) {
-      dispatch({ type: 'counter/increase', amount: valueToNumber });
+      dispatch(counterIncrementByAmmount(valueToNumber));
     }
   };
 
   const toggleCounterDecrement = () => {
-    dispatch({ type: 'counter/decremented' });
+    dispatch(counterDecrement());
   };
 
   return (
