@@ -4,12 +4,11 @@ import {
   counterDecrement,
   counterIncrementByAmmount,
   counterToggle,
-} from '../store/index';
+} from '../store/slice/counterSlice';
 import classes from './Counter.module.css';
 
 export default function Counter() {
-  const counter = useSelector((state) => state.counter);
-  const showCounter = useSelector((state) => state.showCounter);
+  const counterState = useSelector((state) => state.counter);
 
   const dispatch = useDispatch();
 
@@ -42,7 +41,9 @@ export default function Counter() {
   return (
     <main className={classes.counter}>
       <h1>Redux Counter</h1>
-      {showCounter && <div className={classes.value}>{counter}</div>}
+      {counterState.showCounter && (
+        <div className={classes.value}>{counterState.counter}</div>
+      )}
       <div>
         <button onClick={toggleCounterIncrement}>Increment</button>
         <button onClick={toggleCounterIncrease}>Dynamic Increment</button>
